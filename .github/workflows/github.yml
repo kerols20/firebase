@@ -1,4 +1,5 @@
-name: flutter CI/CD /// first thing name of your CI/CD
+name: flutter CI/CD
+
 on:
   push:
     branches:
@@ -11,7 +12,6 @@ jobs:
 
     steps:
       - name: Checkout code
-
         uses: actions/checkout@v2
 
       - name: Set up Java
@@ -36,9 +36,12 @@ jobs:
 
       - name: Run Flutter tests
         run: flutter test
+
+      - name: Build Flutter APK
+        run: flutter build apk --release
+
       - name: List APK files
         run: ls -l build/app/outputs/flutter-apk/
-
 
       - name: Upload APK to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1
@@ -47,5 +50,3 @@ jobs:
           serviceCredentialsFileContent: ${{ secrets.GOOGLE_DISTRIBUTION_KEY }}
           groups: testers_1
           file: build/app/outputs/flutter-apk/app-release.apk
-
-
