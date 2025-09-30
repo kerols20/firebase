@@ -34,7 +34,7 @@ jobs:
       - name: Build Flutter APK
         run: flutter build apk --release
       - name: Upload APK to artifact firebase app distribution
-        uses: wzieba/firebase-app-distribution-github-action@v1
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
         with:
           app_id: ${{secrets.APP_ID}}
           serviceCredentialsFileContent: ${{secrets.GOOGLE_DISTRIBUTION_KEY}}
